@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.3.0'
 
   # Ship lib only. Specs and dev config are not part of the packaged gem.
-  spec.files = Dir['lib/**/*.rb'] + ['README.md', 'LICENCE']
+  spec.files = Dir['lib/**/*.rb'] + ['README.md', 'LICENSE']
   spec.require_paths = ['lib']
 
   spec.metadata['rubygems_mfa_required'] = 'true'
