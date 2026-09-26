@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'greeter/adapters/fake_clock'
+require 'greeter/core/testing/fake_clock'
 
-RSpec.describe Greeter::Adapters::FakeClock do
+RSpec.describe Greeter::Core::Testing::FakeClock do
   subject(:clock) { described_class.new(fixed_time) }
 
   let(:fixed_time) { Time.utc(2024, 1, 1, 12, 0, 0) }

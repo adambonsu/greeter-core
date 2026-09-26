@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 module Greeter
-  module Adapters
-    class FakeClock
-      def initialize(time)
-        @time = time
-      end
+  module Core
+    module Testing
+      class FakeClock
+        def initialize(time)
+          @time = time
+        end
 
-      def now
-        @time
+        def now
+          @time
+        end
       end
     end
   end

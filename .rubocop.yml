@@ -1,0 +1,34 @@
+plugins:
+  - rubocop-rspec
+
+# Merge our Exclude list with RuboCop's defaults (which exclude vendor/,
+# node_modules/, etc.) instead of replacing them. Without this, adding any
+# AllCops/Exclude entry drops the built-in excludes, so CI's bundler-cache
+# install into vendor/bundle would get linted.
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.3
+  Exclude:
+    - 'vendor/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+# Specs live under spec/domain, spec/ports, spec/testing rather than
+# spec/greeter/..., so class-path mirroring does not apply.
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+
+# fake_clock_spec deliberately asserts repeated calls return the same value.
+RSpec/IdenticalEqualityAssertion:
+  Exclude:
+    - "spec/testing/fake_clock_spec.rb"

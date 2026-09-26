@@ -1,0 +1,23 @@
+# Bundler
+/.bundle/
+/vendor/bundle
+Gemfile.lock
+
+# Ruby version managers
+/.ruby-version
+
+# RSpec
+/spec/examples.txt
+
+# SimpleCov
+/coverage/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo

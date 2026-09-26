@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'greeter/domain/guest_name'
-
-RSpec.describe Greeter::Domain::GuestName do
+RSpec.describe Greeter::Core::Domain::GuestName do
   # ---------------------------------------------------------------------------
   # Shared examples — Scenario: Rejects an empty or whitespace-only name
   #                   Scenario: Rejects a name longer than 64 characters
@@ -11,7 +9,7 @@ RSpec.describe Greeter::Domain::GuestName do
   shared_examples 'an invalid guest name' do |raw|
     it "raises InvalidGuestName for #{raw.inspect}" do
       expect { described_class.new(raw) }
-        .to raise_error(Greeter::Domain::InvalidGuestName)
+        .to raise_error(Greeter::Core::Domain::InvalidGuestName)
     end
   end
 
@@ -47,12 +45,12 @@ RSpec.describe Greeter::Domain::GuestName do
   describe 'control-character rejection' do
     it 'rejects a name containing a null byte' do
       expect { described_class.new("Ali\x00ce") }
-        .to raise_error(Greeter::Domain::InvalidGuestName)
+        .to raise_error(Greeter::Core::Domain::InvalidGuestName)
     end
 
     it 'rejects a name containing DEL (0x7F)' do
       expect { described_class.new("Ali\x7Fce") }
-        .to raise_error(Greeter::Domain::InvalidGuestName)
+        .to raise_error(Greeter::Core::Domain::InvalidGuestName)
     end
   end
 end
