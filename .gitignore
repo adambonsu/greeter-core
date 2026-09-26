@@ -2,6 +2,7 @@
 /.bundle/
 /vendor/bundle
 Gemfile.lock
+*.gem
 
 # Ruby version managers
 /.ruby-version
