@@ -27,6 +27,23 @@ Metrics/BlockLength:
 RSpec/SpecFilePathFormat:
   Enabled: false
 
+# Benchmark "specs" are executable performance checks, not *_spec.rb files,
+# and describe a behaviour (latency) rather than a single class.
+RSpec/SpecFilePathSuffix:
+  Exclude:
+    - "spec/benchmarks/**/*"
+
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/benchmarks/**/*"
+
+RSpec/ExampleLength:
+  Exclude:
+    - "spec/benchmarks/**/*"
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - "spec/benchmarks/**/*"
 
 # fake_clock_spec deliberately asserts repeated calls return the same value.
 RSpec/IdenticalEqualityAssertion:

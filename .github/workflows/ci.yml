@@ -46,3 +46,21 @@ jobs:
           bundle exec rubocop \
             --config .rubocop.yml \
             --format github
+
+  # Domain latency guarantee (greeting-core capability). The benchmark lives at
+  # spec/benchmarks/*_bench.rb, so it is not matched by the default *_spec.rb
+  # run above and must be invoked by explicit path. Gated on spec passing.
+  perf:
+    name: Performance benchmark
+    runs-on: ubuntu-latest
+    needs: spec
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler: ${{ env.BUNDLER_VERSION }}
+          bundler-cache: true
+
+      - name: Run latency benchmark (fails on budget breach)
+        run: bundle exec rspec spec/benchmarks/ --format progress
