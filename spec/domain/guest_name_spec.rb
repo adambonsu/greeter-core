@@ -39,6 +39,35 @@ RSpec.describe Greeter::Core::Domain::GuestName do
   end
 
   # ---------------------------------------------------------------------------
+  # Value-object equality contract: == must be consistent with eql? and hash so
+  # instances behave correctly as Hash keys and in Sets.
+  # ---------------------------------------------------------------------------
+  describe 'value equality' do
+    let(:lower) { described_class.new('alice') }
+    let(:upper) { described_class.new('Alice') }
+
+    it 'treats names that normalise equally as ==' do
+      expect(lower).to eq(upper)
+    end
+
+    it 'treats equal names as eql?' do
+      expect(lower).to eql(upper)
+    end
+
+    it 'gives equal names the same hash' do
+      expect(lower.hash).to eq(upper.hash)
+    end
+
+    it 'finds an equal name as a Hash key' do
+      expect({ lower => 1 }[upper]).to eq(1)
+    end
+
+    it 'de-duplicates equal names in an Array#uniq' do
+      expect([lower, upper].uniq.size).to eq(1)
+    end
+  end
+
+  # ---------------------------------------------------------------------------
   # Scenario: Rejects names containing control or escape characters
   # — additional control-character boundary cases
   # ---------------------------------------------------------------------------

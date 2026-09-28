@@ -21,6 +21,11 @@ module Greeter
         def ==(other)
           other.is_a?(GuestName) && display == other.display
         end
+        alias eql? ==
+
+        def hash
+          [self.class, display].hash
+        end
 
         private
 
